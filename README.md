@@ -89,5 +89,13 @@ ITEM0013 x 4
 - 在项目中`src/main/java/com/thoughtworks`目录下`App.java`类下的`bestCharge`方法中编写代码
 - 编写完成后的代码要能通过`src/test`目录下对应的测试验收
 
-## 如何测试
-- 根目录下执行`./gradlew clean test`，查看测试结果
+## 使用简介
+1. 如何导入gradle项目(现在不要求掌握什么是gradle)
+- https://www.youtube.com/watch?v=0s7YYjQEsfU
+- https://www.jetbrains.com/help/idea/gradle.html
+
+2.运行所有测试  
+```
+./gradlew clean test
+```
+3. 运行单个测试可以直接点击对应测试右边的绿色三角形
