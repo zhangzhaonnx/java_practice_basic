@@ -1,5 +1,6 @@
 package com.thoughtworks;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
@@ -18,8 +19,128 @@ public class App {
    * @param selectedItems 选择的菜品信息
    */
   public static String bestCharge(String selectedItems) {
-    // 此处补全代码
-    return selectedItems;
+    String[] selectedIds = parseSelectedIds(selectedItems);
+    int[] selectedCounts = parseSelectedCounts(selectedItems);
+
+    int originalTotal = getOriginalTotal(selectedIds, selectedCounts);
+    int halfDiscountTotal = getHalfDiscountTotal(selectedIds, selectedCounts);
+    int fullReductionTotal = getFullReductionTotal(originalTotal);
+
+    String orderList = buildOrderList(selectedIds, selectedCounts);
+    String discountInfo = buildDiscountInfo(originalTotal, halfDiscountTotal, fullReductionTotal,
+        selectedIds);
+    String totalInfo = buildTotalInfo(originalTotal, halfDiscountTotal, fullReductionTotal);
+
+    return orderList + discountInfo + totalInfo;
+  }
+
+  private static String buildTotalInfo(int originalTotal, int halfDiscountTotal,
+      int fullReductionTotal) {
+    StringBuilder totalInfo = new StringBuilder();
+
+    int total = Math.min(originalTotal, Math.min(halfDiscountTotal, fullReductionTotal));
+    totalInfo.append(String.format("总计：%s元\n", total));
+    totalInfo.append("===================================");
+
+    return totalInfo.toString();
+  }
+
+  private static String buildDiscountInfo(int originalTotal, int halfDiscountTotal,
+      int fullReductionTotal, String[] selectedIds) {
+    StringBuilder discountInfo = new StringBuilder();
+    if (halfDiscountTotal < originalTotal && fullReductionTotal < originalTotal) {
+      if (halfDiscountTotal <= fullReductionTotal) {
+        discountInfo.append("使用优惠:\n");
+        String halfNamesStr = getSelectedHalfNamesStr(selectedIds);
+        int saveTotal = originalTotal - halfDiscountTotal;
+        discountInfo.append(String.format("指定菜品半价(%s)，省%s元\n", halfNamesStr, saveTotal));
+        discountInfo.append("-----------------------------------\n");
+      } else {
+        discountInfo.append("使用优惠:\n");
+        int saveTotal = originalTotal - fullReductionTotal;
+        discountInfo.append(String.format("满30减6元，省%s元\n", saveTotal));
+        discountInfo.append("-----------------------------------\n");
+      }
+    }
+
+    return discountInfo.toString();
+  }
+
+  private static String getSelectedHalfNamesStr(String[] selectedIds) {
+    StringBuilder builder = new StringBuilder();
+    for (String selectedId : selectedIds) {
+      int menuIndex = Arrays.binarySearch(getItemIds(), selectedId);
+      if (isHalfPrice(selectedId)) {
+        builder.append("，").append(getItemNames()[menuIndex]);
+      }
+    }
+    return builder.toString().substring(1);
+  }
+
+  private static int getFullReductionTotal(int originalTotal) {
+    return originalTotal >= 30 ? originalTotal - 6 : originalTotal;
+  }
+
+  private static int getHalfDiscountTotal(String[] selectedIds, int[] selectedCounts) {
+    int halfDiscountTotal = 0;
+    for (String selectedId : selectedIds) {
+      int selectedIndex = Arrays.binarySearch(selectedIds, selectedId);
+      int menuIndex = Arrays.binarySearch(getItemIds(), selectedId);
+      int count = selectedCounts[selectedIndex];
+      int product = (int) getItemPrices()[menuIndex] * count;
+      halfDiscountTotal += isHalfPrice(selectedId) ? product / 2 : product;
+    }
+    return halfDiscountTotal;
+  }
+
+  private static int getOriginalTotal(String[] selectedIds, int[] selectedCounts) {
+    int originalTotal = 0;
+    for (String selectedId : selectedIds) {
+      int selectedIndex = Arrays.binarySearch(selectedIds, selectedId);
+      int menuIndex = Arrays.binarySearch(getItemIds(), selectedId);
+      int count = selectedCounts[selectedIndex];
+      int product = (int) getItemPrices()[menuIndex] * count;
+      originalTotal += product;
+    }
+    return originalTotal;
+  }
+
+  private static boolean isHalfPrice(String selectedId) {
+    return Arrays.binarySearch(getHalfPriceIds(), selectedId) >= 0;
+  }
+
+  private static String buildOrderList(String[] selectedIds, int[] selectedCounts) {
+    StringBuilder builder = new StringBuilder();
+
+    builder.append("============= 订餐明细 =============\n");
+    for (String selectedId : selectedIds) {
+      int selectedIndex = Arrays.binarySearch(selectedIds, selectedId);
+      int menuIndex = Arrays.binarySearch(getItemIds(), selectedId);
+      int count = selectedCounts[selectedIndex];
+      int product = (int) getItemPrices()[menuIndex] * count;
+      builder.append(String.format("%s x %s = %s元\n", getItemNames()[menuIndex], count, product));
+    }
+    builder.append("-----------------------------------\n");
+
+    return builder.toString();
+  }
+
+  private static int[] parseSelectedCounts(String selectedItems) {
+    String[] items = selectedItems.split(",");
+    int[] counts = new int[items.length];
+    for (int i = 0; i < items.length; i ++) {
+      counts[i] = Integer.parseInt(items[i].split(" x ")[1]);
+    }
+    return counts;
+  }
+
+  private static String[] parseSelectedIds(String selectedItems) {
+    String[] items = selectedItems.split(",");
+    String[] ids = new String[items.length];
+    for (int i = 0; i < items.length; i ++) {
+      ids[i] = items[i].split(" x ")[0];
+    }
+    return ids;
   }
 
   /**
