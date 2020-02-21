@@ -16,4 +16,12 @@ public class DataProvider {
   public static List<String> getHalfDishIds() {
     return Arrays.asList("ITEM0001", "ITEM0022");
   }
+
+  public static int getFullReductionLimit() {
+    return 30;
+  }
+
+  public static int getFullReduction() {
+    return 6;
+  }
 }

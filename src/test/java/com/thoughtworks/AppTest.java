@@ -8,8 +8,7 @@ class AppTest {
 
   @Test
   public void bestCharge_should_use_half_promotion() {
-    Restaurant restaurant = new Restaurant();
-    String result = restaurant.bestCharge("ITEM0001 x 1,ITEM0013 x 2,ITEM0022 x 1");
+    String result = App.bestCharge("ITEM0001 x 1,ITEM0013 x 2,ITEM0022 x 1");
 
     String excepted = "============= 订餐明细 =============\n"
             + "黄焖鸡 x 1 = 18元\n"
@@ -26,8 +25,7 @@ class AppTest {
 
   @Test
   public void bestCharge_should_use_full_discount_promotion() {
-    Restaurant restaurant = new Restaurant();
-    String result = restaurant.bestCharge("ITEM0001 x 1,ITEM0013 x 2,ITEM0022 x 1");
+    String result = App.bestCharge("ITEM0013 x 4,ITEM0022 x 1");
 
     String excepted = "============= 订餐明细 =============\n"
             + "肉夹馍 x 4 = 24元\n"
@@ -43,8 +41,7 @@ class AppTest {
 
   @Test
   public void bestCharge_should_not_use_promotion() {
-    Restaurant restaurant = new Restaurant();
-    String result = restaurant.bestCharge("ITEM0001 x 1,ITEM0013 x 2,ITEM0022 x 1");
+    String result = App.bestCharge("ITEM0013 x 4");
 
     String excepted = "============= 订餐明细 =============\n"
             + "肉夹馍 x 4 = 24元\n"
