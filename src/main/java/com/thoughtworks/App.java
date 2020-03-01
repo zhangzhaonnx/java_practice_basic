@@ -7,7 +7,7 @@ import java.util.List;
 public class App {
 
   public static void main(String[] args) {
-    // 以下是执行交易的交易员和发生的一系列交易,请为以下八个查询方法添加实现。
+    // 以下是执行交易的交易员和发生的一系列交易,请为以下八个查询方法提供实现。
     Trader raoul = new Trader("Raoul", "Cambridge");
     Trader mario = new Trader("Mario", "Milan");
     Trader alan = new Trader("Alan", "Cambridge");
@@ -22,7 +22,7 @@ public class App {
     // 1.找出2011年的所有交易并按交易额排序(从低到高)
     System.out.println(get2011Transactions(transactions));
 
-    // 2.交易员都在哪些不同的􏱜市工作过
+    // 2.交易员都在哪些不同的􏱜城市工作过
     System.out.println(getTradersCity(transactions));
 
     // 3.查找所有来自于剑桥的交易员，并按姓名排序
@@ -34,10 +34,10 @@ public class App {
     // 5.有没有交易员是在米兰工作的
     System.out.println(hasMilanTrader(transactions));
 
-    // 6.返回交易员是剑桥的所有交易的交易额。
+    // 6.返回交易员是剑桥的所有交易的交易额
     System.out.println(getCambridgeTransactionsValue(transactions));
 
-    // 7.所有交易中，最高的交易额是多少？
+    // 7.所有交易中，最高的交易额是多少
     System.out.println(getMaxTransactionValue(transactions));
 
     // 8.返回交易额最小的交易
