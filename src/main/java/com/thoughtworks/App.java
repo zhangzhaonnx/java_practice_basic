@@ -1,5 +1,8 @@
 package com.thoughtworks;
 
+import com.thoughtworks.game.Game;
+import com.thoughtworks.game.GameBuilder;
+import com.thoughtworks.game.GuessRecord;
 import com.thoughtworks.result.GuessResult;
 import java.util.List;
 import java.util.Scanner;
@@ -11,14 +14,20 @@ public class App {
 
     Scanner scanner = new Scanner(System.in);
     while (true) {
-      String input = scanner.nextLine();
-      GuessResult result = game.guess(input);
-      printRecords(game.getRecords());
+      String guess = scanner.nextLine();
+      GuessResult result = game.guess(guess);
 
+      printRecords(game.getRecords());
       if (game.isEnd()) {
         printEndMessage(game, result);
         break;
       }
+    }
+  }
+
+  private static void printRecords(List<GuessRecord> records) {
+    for (GuessRecord record : records) {
+      System.out.println(record);
     }
   }
 
@@ -29,12 +38,6 @@ public class App {
       System.out.println(
           String.format("Unfortunately, you have no chance, the answer is %s!",
               game.getAnswer()));
-    }
-  }
-
-  private static void printRecords(List<GuessRecord> records) {
-    for (GuessRecord record : records) {
-      System.out.println(record);
     }
   }
 }

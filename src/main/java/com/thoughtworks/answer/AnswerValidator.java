@@ -1,4 +1,4 @@
-package com.thoughtworks.validate;
+package com.thoughtworks.answer;
 
 public interface AnswerValidator {
 

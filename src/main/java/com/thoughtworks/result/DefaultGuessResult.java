@@ -1,6 +1,6 @@
 package com.thoughtworks.result;
 
-import com.thoughtworks.Answer;
+import com.thoughtworks.answer.Answer;
 
 public class DefaultGuessResult implements GuessResult {
 

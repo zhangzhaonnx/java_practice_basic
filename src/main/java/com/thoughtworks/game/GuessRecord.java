@@ -1,4 +1,4 @@
-package com.thoughtworks;
+package com.thoughtworks.game;
 
 import com.thoughtworks.result.GuessResult;
 

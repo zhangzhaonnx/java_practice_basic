@@ -1,10 +1,11 @@
-package com.thoughtworks;
+package com.thoughtworks.game;
 
+import com.thoughtworks.answer.DefaultAnswerJudge;
 import com.thoughtworks.generate.FileAnswerGenerator;
 import com.thoughtworks.generate.MultiAnswerGenerator;
 import com.thoughtworks.generate.RandomAnswerGenerator;
-import com.thoughtworks.validate.AnswerValidator;
-import com.thoughtworks.validate.SimpleAnswerValidator;
+import com.thoughtworks.answer.AnswerValidator;
+import com.thoughtworks.answer.SimpleAnswerValidator;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -19,6 +20,6 @@ public class GameBuilder {
     answerGenerator.addAnswerGenerator(new FileAnswerGenerator(ANSWER_FILE_PATH, answerValidator));
     answerGenerator.addAnswerGenerator(new RandomAnswerGenerator());
 
-    return new Game(answerGenerator, answerValidator);
+    return new Game(answerGenerator, answerValidator, new DefaultAnswerJudge());
   }
 }
