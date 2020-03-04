@@ -1,4 +1,4 @@
-package com.thoughtworks.generator;
+package com.thoughtworks.generate;
 
 public interface AnswerGenerator {
 

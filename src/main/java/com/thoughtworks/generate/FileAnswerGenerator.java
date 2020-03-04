@@ -1,6 +1,6 @@
-package com.thoughtworks.generator;
+package com.thoughtworks.generate;
 
-import com.thoughtworks.AnswerValidator;
+import com.thoughtworks.validate.AnswerValidator;
 import com.thoughtworks.exception.AnswerGenerateException;
 import java.io.BufferedReader;
 import java.io.InputStream;

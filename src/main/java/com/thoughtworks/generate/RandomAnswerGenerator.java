@@ -1,4 +1,4 @@
-package com.thoughtworks.generator;
+package com.thoughtworks.generate;
 
 import java.util.HashSet;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.thoughtworks;
+package com.thoughtworks.validate;
 
 import com.thoughtworks.exception.InvalidAnswerException;
 import java.util.Arrays;

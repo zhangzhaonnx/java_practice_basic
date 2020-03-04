@@ -1,4 +1,4 @@
-package com.thoughtworks.generator;
+package com.thoughtworks.generate;
 
 import com.thoughtworks.exception.AnswerGenerateException;
 import java.util.ArrayList;
