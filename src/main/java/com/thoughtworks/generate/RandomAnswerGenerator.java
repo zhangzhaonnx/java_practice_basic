@@ -9,16 +9,21 @@ public class RandomAnswerGenerator implements AnswerGenerator {
 
   private static final int ANSWER_NUMBER_LIMIT = 10;
   private static final String ANSWER_DELIMITER = "";
+  private Random random;
+
+  public RandomAnswerGenerator() {
+    this.random = new Random();
+  }
 
   @Override
-  public String generate() {
-    Random random = new Random();
-
-    Set<String> numbers = new HashSet<>();
-    while (numbers.size() < Answer.LENGTH) {
-      numbers.add(String.valueOf(random.nextInt(ANSWER_NUMBER_LIMIT)));
+  public Answer generate() {
+    Set<String> digits = new HashSet<>();
+    while (digits.size() < Answer.LENGTH) {
+      int digit = random.nextInt(ANSWER_NUMBER_LIMIT);
+      digits.add(String.valueOf(digit));
     }
+    String number = String.join(ANSWER_DELIMITER, digits);
 
-    return String.join(ANSWER_DELIMITER, numbers);
+    return new Answer(number);
   }
 }

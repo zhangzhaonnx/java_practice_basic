@@ -8,18 +8,19 @@ import java.util.Set;
 public class SimpleAnswerValidator implements AnswerValidator {
 
   @Override
-  public void validate(String answer) {
-    boolean valid = answer.length() == Answer.LENGTH;
+  public void validate(Answer answer) {
+    String number = answer.getNumber();
+    boolean valid = number.length() == Answer.LENGTH;
 
-    for (char num : answer.toCharArray()) {
+    for (char num : number.toCharArray()) {
       if (!Character.isDigit(num)) {
         valid = false;
         break;
       }
     }
 
-    Set<String> numbers = new HashSet<>(Arrays.asList(answer.split("")));
-    if (numbers.size() < answer.length()) {
+    Set<String> digits = new HashSet<>(Arrays.asList(number.split("")));
+    if (digits.size() < number.length()) {
       valid = false;
     }
 

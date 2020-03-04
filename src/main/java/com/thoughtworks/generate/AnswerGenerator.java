@@ -1,6 +1,8 @@
 package com.thoughtworks.generate;
 
+import com.thoughtworks.answer.Answer;
+
 public interface AnswerGenerator {
 
-  String generate();
+  Answer generate();
 }

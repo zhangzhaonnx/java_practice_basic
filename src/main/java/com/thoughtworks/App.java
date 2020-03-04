@@ -1,5 +1,6 @@
 package com.thoughtworks;
 
+import com.thoughtworks.answer.Answer;
 import com.thoughtworks.game.Game;
 import com.thoughtworks.game.GameBuilder;
 import com.thoughtworks.game.GuessRecord;
@@ -15,7 +16,7 @@ public class App {
     Scanner scanner = new Scanner(System.in);
     while (true) {
       String guess = scanner.nextLine();
-      GuessResult result = game.guess(guess);
+      GuessResult result = game.guess(new Answer(guess));
 
       printRecords(game.getRecords());
       if (game.isEnd()) {

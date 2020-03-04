@@ -4,5 +4,5 @@ import com.thoughtworks.result.GuessResult;
 
 public interface AnswerJudge {
 
-  GuessResult judge(String answer, String guess);
+  GuessResult judge(Answer answer, Answer guess);
 }

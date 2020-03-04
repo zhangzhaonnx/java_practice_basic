@@ -1,5 +1,6 @@
 package com.thoughtworks.generate;
 
+import com.thoughtworks.answer.Answer;
 import com.thoughtworks.answer.AnswerValidator;
 import com.thoughtworks.exception.AnswerGenerateException;
 import java.io.BufferedReader;
@@ -19,13 +20,14 @@ public class FileAnswerGenerator implements AnswerGenerator {
   }
 
   @Override
-  public String generate() {
+  public Answer generate() {
     ClassLoader classLoader = getClass().getClassLoader();
     try (InputStream is = classLoader.getResourceAsStream(filePath.toString())) {
       Objects.requireNonNull(is);
       BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-      String answer = reader.readLine();
+      String number = reader.readLine();
 
+      Answer answer = new Answer(number);
       answerValidator.validate(answer);
       return answer;
     } catch (Exception e) {

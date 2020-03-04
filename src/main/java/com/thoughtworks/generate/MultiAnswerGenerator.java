@@ -1,5 +1,6 @@
 package com.thoughtworks.generate;
 
+import com.thoughtworks.answer.Answer;
 import com.thoughtworks.exception.AnswerGenerateException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class MultiAnswerGenerator implements AnswerGenerator {
   }
 
   @Override
-  public String generate() {
+  public Answer generate() {
     for (AnswerGenerator generator : answerGenerators) {
       try {
         return generator.generate();

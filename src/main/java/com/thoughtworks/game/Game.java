@@ -1,11 +1,12 @@
 package com.thoughtworks.game;
 
+import com.thoughtworks.answer.Answer;
 import com.thoughtworks.answer.AnswerJudge;
+import com.thoughtworks.answer.AnswerValidator;
 import com.thoughtworks.exception.InvalidAnswerException;
 import com.thoughtworks.generate.AnswerGenerator;
 import com.thoughtworks.result.GuessResult;
 import com.thoughtworks.result.WrongInputGuessResult;
-import com.thoughtworks.answer.AnswerValidator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Game {
 
   private final AnswerValidator answerValidator;
   private final AnswerJudge answerJudge;
-  private final String answer;
+  private final Answer answer;
 
   private int remainChance = CHANCE_LIMIT;
   private List<GuessRecord> records = new ArrayList<>();
@@ -27,7 +28,7 @@ public class Game {
     this.answerJudge = answerJudge;
   }
 
-  public GuessResult guess(String guess) {
+  public GuessResult guess(Answer guess) {
     GuessResult result;
     try {
       answerValidator.validate(guess);
@@ -41,7 +42,7 @@ public class Game {
     return result;
   }
 
-  public String getAnswer() {
+  public Answer getAnswer() {
     return answer;
   }
 
