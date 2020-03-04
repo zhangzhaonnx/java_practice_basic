@@ -1,4 +1,4 @@
-package com.thoughtworks;
+package com.thoughtworks.exception;
 
 public class AnswerGenerateException extends RuntimeException {
 

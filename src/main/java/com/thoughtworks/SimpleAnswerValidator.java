@@ -1,5 +1,6 @@
 package com.thoughtworks;
 
+import com.thoughtworks.exception.InvalidAnswerException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

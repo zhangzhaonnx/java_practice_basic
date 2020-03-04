@@ -1,5 +1,7 @@
 package com.thoughtworks;
 
+import com.thoughtworks.generator.AnswerGenerator;
+
 public class GussNumberGame {
 
   private static final String RESULT_TEMPLATE = "%sA%sB";
