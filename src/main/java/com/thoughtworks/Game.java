@@ -6,11 +6,17 @@ import com.thoughtworks.result.DefaultGuessResult;
 import com.thoughtworks.result.GuessResult;
 import com.thoughtworks.result.WrongInputGuessResult;
 import com.thoughtworks.validate.AnswerValidator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
+  private static final int CHANCE_LIMIT = 6;
+
   private AnswerValidator answerValidator;
   private String answer;
+  private int remainChance = CHANCE_LIMIT;
+  private List<GuessRecord> records = new ArrayList<>();
 
   public Game(AnswerGenerator answerGenerator, AnswerValidator answerValidator) {
     this.answer = answerGenerator.generate();
@@ -18,12 +24,20 @@ public class Game {
   }
 
   public GuessResult guess(String numbers) {
+    GuessResult result;
     try {
       answerValidator.validate(numbers);
+      result = judge(numbers);
+      remainChance--;
     } catch (InvalidAnswerException e) {
-      return new WrongInputGuessResult();
+      result = new WrongInputGuessResult();
     }
 
+    records.add(new GuessRecord(numbers, result));
+    return result;
+  }
+
+  private GuessResult judge(String numbers) {
     int correctCount = 0;
     int onlyNumberCorrectCount = 0;
 
@@ -43,5 +57,14 @@ public class Game {
 
   public String getAnswer() {
     return answer;
+  }
+
+  public boolean isEnd() {
+    GuessRecord lastRecord = records.get(records.size() - 1);
+    return lastRecord.getResult().isCorrect() || remainChance <= 0;
+  }
+
+  public List<GuessRecord> getRecords() {
+    return records;
   }
 }
