@@ -1,31 +1,32 @@
 package com.thoughtworks.game;
 
 import com.thoughtworks.answer.Answer;
+import com.thoughtworks.answer.AnswerGenerator;
 import com.thoughtworks.answer.AnswerJudge;
 import com.thoughtworks.answer.AnswerValidator;
 import com.thoughtworks.exception.InvalidAnswerException;
-import com.thoughtworks.generate.AnswerGenerator;
 import com.thoughtworks.result.GuessResult;
 import com.thoughtworks.result.WrongInputGuessResult;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
+  private static final Path ANSWER_FILE_PATH = Paths.get("answer.txt");
   private static final int CHANCE_LIMIT = 6;
 
-  private final AnswerValidator answerValidator;
-  private final AnswerJudge answerJudge;
+  private final AnswerValidator answerValidator = new AnswerValidator();
+  private final AnswerJudge answerJudge = new AnswerJudge();
   private final Answer answer;
 
   private int remainChance = CHANCE_LIMIT;
   private List<GuessRecord> records = new ArrayList<>();
 
-  public Game(AnswerGenerator answerGenerator, AnswerValidator answerValidator,
-      AnswerJudge answerJudge) {
+  public Game() {
+    AnswerGenerator answerGenerator = new AnswerGenerator(ANSWER_FILE_PATH);
     this.answer = answerGenerator.generate();
-    this.answerValidator = answerValidator;
-    this.answerJudge = answerJudge;
   }
 
   public GuessResult guess(Answer guess) {

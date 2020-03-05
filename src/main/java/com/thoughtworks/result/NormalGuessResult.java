@@ -2,14 +2,14 @@ package com.thoughtworks.result;
 
 import com.thoughtworks.answer.Answer;
 
-public class DefaultGuessResult implements GuessResult {
+public class NormalGuessResult implements GuessResult {
 
   private static final String RESULT_TEMPLATE = "%sA%sB";
 
   private int correctCount;
   private int onlyNumberCorrectCount;
 
-  public DefaultGuessResult(int correctCount, int onlyNumberCorrectCount) {
+  public NormalGuessResult(int correctCount, int onlyNumberCorrectCount) {
     this.correctCount = correctCount;
     this.onlyNumberCorrectCount = onlyNumberCorrectCount;
   }

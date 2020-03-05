@@ -2,7 +2,6 @@ package com.thoughtworks;
 
 import com.thoughtworks.answer.Answer;
 import com.thoughtworks.game.Game;
-import com.thoughtworks.game.GameBuilder;
 import com.thoughtworks.game.GuessRecord;
 import com.thoughtworks.result.GuessResult;
 import java.util.List;
@@ -11,19 +10,17 @@ import java.util.Scanner;
 public class App {
 
   public static void main(String[] args) {
-    Game game = GameBuilder.buildDefaultGame();
+    Game game = new Game();
 
+    GuessResult result;
     Scanner scanner = new Scanner(System.in);
-    while (true) {
+    do {
       String guess = scanner.nextLine();
-      GuessResult result = game.guess(new Answer(guess));
-
+      result = game.guess(new Answer(guess));
       printRecords(game.getRecords());
-      if (game.isEnd()) {
-        printEndMessage(game, result);
-        break;
-      }
-    }
+    } while (!game.isEnd());
+
+    printEndMessage(game, result);
   }
 
   private static void printRecords(List<GuessRecord> records) {
