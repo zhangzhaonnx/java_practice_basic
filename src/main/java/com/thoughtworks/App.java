@@ -19,7 +19,7 @@ public class App {
     repository
         .save(Arrays.asList(student1, student2, student3, student4, student5, student6, student7));
 
-    // 查找所有学生并打印R
+    // 查找所有学生并打印
     System.out.println("所有学生----------------------------------------------");
     repository.query().forEach(System.out::println);
     // 查询1-1R班的所有同学的信息并按照学号倒序排列
