@@ -1,78 +1,40 @@
 package com.thoughtworks;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class App {
 
   public static void main(String[] args) {
-    // 以下是执行交易的交易员和发生的一系列交易,请为以下八个查询方法提供实现。
-    Trader raoul = new Trader("Raoul", "Cambridge");
-    Trader mario = new Trader("Mario", "Milan");
-    Trader alan = new Trader("Alan", "Cambridge");
-    Trader brian = new Trader("Brian", "Cambridge");
-    List<Transaction> transactions = Arrays.asList(new Transaction(brian, 2011, 300),
-        new Transaction(raoul, 2012, 1000),
-        new Transaction(raoul, 2011, 400),
-        new Transaction(mario, 2012, 710), new Transaction(mario, 2012, 700),
-        new Transaction(alan, 2012, 950)
-    );
+    // 创建一批学生
+    Student student1 = new Student("001", "张三", "男", 2020, "1994-01-12", "1-13");
+    Student student2 = new Student("002", "李四", "男", 2020, "1994-05-25", "1-1");
+    Student student3 = new Student("003", "王五", "男", 2019, "1995-04-02", "2-10");
+    Student student4 = new Student("004", "周梅", "女", 2020, "1993-06-16", "1-1");
+    Student student5 = new Student("005", "钱风", "男", 2020, "1993-01-10", "1-1");
+    Student student6 = new Student("006", "吴兰", "女", 2019, "1995-06-09", "2-1");
+    Student student7 = new Student("007", "李云", "男", 2019, "1993-08-11", "1-1");
 
-    // 1.找出2011年的所有交易并按交易额排序(从低到高)
-    System.out.println(get2011Transactions(transactions));
+    StudentRepository repository = new StudentRepository();
+    // 保存所有学生
+    repository
+        .save(Arrays.asList(student1, student2, student3, student4, student5, student6, student7));
 
-    // 2.交易员都在哪些不同的􏱜城市工作过
-    System.out.println(getTradersCity(transactions));
+    // 查找所有学生并打印R
+    System.out.println("所有学生----------------------------------------------");
+    repository.query().forEach(System.out::println);
+    // 查询1-1R班的所有同学的信息并按照学号倒序排列
+    System.out.println("1-1班的学生-------------------------------------------");
+    repository.queryByClassId("1-1").forEach(System.out::println);
 
-    // 3.查找所有来自于剑桥的交易员，并按姓名排序
-    System.out.println(getCambridgeTraders(transactions));
+    // 修改学号003的学生的姓名
+    student3.setName("王伍");
+    repository.update("003", student3);
+    System.out.println("修改学号003的学生--------------------------------------");
+    repository.query().forEach(System.out::println);
 
-    // 4.返回所有交易员的姓名字符串，按字母顺序排序
-    System.out.println(getTradersName(transactions));
-
-    // 5.有没有交易员是在米兰工作的
-    System.out.println(hasMilanTrader(transactions));
-
-    // 6.返回交易员是剑桥的所有交易的交易额
-    System.out.println(getCambridgeTransactionsValue(transactions));
-
-    // 7.所有交易中，最高的交易额是多少
-    System.out.println(getMaxTransactionValue(transactions));
-
-    // 8.返回交易额最小的交易
-    System.out.println(getMinTransaction(transactions));
-  }
-
-  public static List<Transaction> get2011Transactions(List<Transaction> transactions) {
-    return Collections.emptyList();
-  }
-
-  public static List<String> getTradersCity(List<Transaction> transactions) {
-    return Collections.emptyList();
-  }
-
-  public static List<Trader> getCambridgeTraders(List<Transaction> transactions) {
-    return Collections.emptyList();
-  }
-
-  public static List<String> getTradersName(List<Transaction> transactions) {
-    return Collections.emptyList();
-  }
-
-  public static boolean hasMilanTrader(List<Transaction> transactions) {
-    return false;
-  }
-
-  public static List<Integer> getCambridgeTransactionsValue(List<Transaction> transactions) {
-    return Collections.emptyList();
-  }
-
-  public static int getMaxTransactionValue(List<Transaction> transactions) {
-    return 0;
-  }
-
-  public static Transaction getMinTransaction(List<Transaction> transactions) {
-    return null;
+    // 删除学号006的学生
+    repository.delete("006");
+    System.out.println("删除学号006的学生--------------------------------------");
+    repository.query().forEach(System.out::println);
   }
 }

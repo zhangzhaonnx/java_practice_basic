@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
     testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
 }
 
