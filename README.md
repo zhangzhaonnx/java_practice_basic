@@ -9,3 +9,25 @@
     ```
     jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Hongkong
     ```
+# JDBC
+
+## 学习目标
+- 了解JDBC，并掌握基本使用
+- 能够使用JDBC进行简单的增删查改操作
+
+## 参考资料:
+- `文档` [JDBC 使用说明](https://www.runoob.com/w3cnote/jdbc-use-guide.html)
+- `扩展` [Getting Started with the JDBC API](https://download.oracle.com/otn_hosted_doc/jdeveloper/904preview/jdk14doc/docs/guide/jdbc/getstart/GettingStartedTOC.fm.html)
+
+```sql
+CREATE TABLE student (
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    gender VARCHAR(100) NOT NULL,
+    admission_year INT NOT NULL,
+    birthday Date NOT NULL,
+    class_id VARCHAR(100) NOT NULL,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
